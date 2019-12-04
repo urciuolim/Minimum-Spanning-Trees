@@ -49,9 +49,15 @@ public class Test1 {
 		System.out.println(G.toString());
 		
 		LinkedList<Edge> kruskalMST = Kruskal.kruskalMST(G, G.getEdges());
+		kruskalMST.sort(new HardEdgeSort());
 		System.out.println(kruskalMST);
 		
 		LinkedList<Edge> primMST = Prim.PrimMSTBinaryHeap(G, c);
+		primMST.sort(new HardEdgeSort());
 		System.out.println(primMST);
+		
+		LinkedList<Edge> myMST = MyMST.myMST(G);
+		myMST.sort(new HardEdgeSort());
+		System.out.println(myMST);
 	}
 }
