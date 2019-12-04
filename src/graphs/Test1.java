@@ -50,5 +50,8 @@ public class Test1 {
 		
 		LinkedList<Edge> kruskalMST = Kruskal.kruskalMST(G, G.getEdges());
 		System.out.println(kruskalMST);
+		
+		LinkedList<Edge> primMST = Prim.PrimMSTBinaryHeap(G, c);
+		System.out.println(primMST);
 	}
 }
