@@ -48,16 +48,27 @@ public class Test1 {
 		Graph G = new Graph(nodes);
 		System.out.println(G.toString());
 		
+		long start;
+		long end;
+		start= System.nanoTime();
 		LinkedList<Edge> kruskalMST = Kruskal.kruskalMST(G, G.getEdges());
+		end = System.nanoTime();
 		kruskalMST.sort(new HardEdgeSort());
 		System.out.println(kruskalMST);
+		System.out.println("Executed in " + (end-start) + " ms");
 		
+		start= System.nanoTime();
 		LinkedList<Edge> primMST = Prim.PrimMSTBinaryHeap(G, c);
+		end = System.nanoTime();
 		primMST.sort(new HardEdgeSort());
 		System.out.println(primMST);
+		System.out.println("Executed in " + (end-start) + " ms");
 		
+		start= System.nanoTime();
 		LinkedList<Edge> myMST = MyMST.myMST(G);
+		end = System.nanoTime();
 		myMST.sort(new HardEdgeSort());
 		System.out.println(myMST);
+		System.out.println("Executed in " + (end-start) + " ms");
 	}
 }
