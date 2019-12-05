@@ -18,17 +18,26 @@ public class MyMST
 			}
 		}
 		Edge next = queue.pop();
-		fav[next.source.ID] = new Edge(0, null, null);
-		fav[next.destination.ID] = next;
+		fav[next.source.ID] = next;
+		//fav[next.destination.ID] = next;
 		while (!queue.isEmpty())
 		{
+			for (Edge e : fav)
+			{
+				if (e == null)
+					System.out.print("empty, ");
+				else if (e.source == null)
+					System.out.print("0, ");
+				else
+					System.out.print(e + ", ");
+			}
 			next = queue.pop();
+			System.out.println("\n" + next.toString());
 			sourceIn = fav[next.source.ID] != null;
 			destIn = fav[next.destination.ID] != null;
 			if (!sourceIn && !destIn)
 			{
-				queue.add(next);
-				continue;
+				fav[next.source.ID] = next;
 			}
 			else if (sourceIn && !destIn)
 			{
@@ -42,9 +51,16 @@ public class MyMST
 			{
 				sourceWeight = fav[next.source.ID].weight;
 				destWeight = fav[next.destination.ID].weight;
-				if (sourceWeight + next.weight <= destWeight)
+				if (next.weight <= destWeight && next.weight <= sourceWeight)
+				{
+					if (sourceWeight <= destWeight)
+						fav[next.destination.ID] = next;
+					else
+						fav[next.source.ID] = next;
+				}
+				else if (next.weight <= destWeight)//if (sourceWeight + next.weight <= destWeight)
 					fav[next.destination.ID] = next;
-				if (destWeight + next.weight <= sourceWeight)
+				else if (next.weight <= sourceWeight)//if (destWeight + next.weight <= sourceWeight)
 					fav[next.source.ID] = next;
 			}
 		}

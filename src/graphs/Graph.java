@@ -16,6 +16,22 @@ public class Graph
 		nodes = n;
 	}
 	
+	public Graph(LinkedList<Edge> edges, int numVert)
+	{
+		Node[] ns = new Node[numVert];
+		for (int i = 0; i < ns.length; i++)
+			ns[i] = new Node(i);
+		nodes = new LinkedList<Node>();
+		for (Edge e : edges)
+		{
+			ns[e.source.ID].edges.add(e);
+		}
+		for (Node n : ns)
+		{
+			nodes.add(n);
+		}
+	}
+	
 	public String toString()
 	{
 		String out = "";

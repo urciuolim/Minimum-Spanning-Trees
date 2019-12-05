@@ -7,14 +7,14 @@ public class Test3 {
 
 	public static void main(String[] args) 
 	{
-		RandomGraph G = new RandomGraph(100, 500, true, 100);
+		int NUMVERT = 10;
+		RandomGraph G = new RandomGraph(NUMVERT, 100, true, 100);
 		System.out.println(G.toString());
 		HardEdgeSort hardSort = new HardEdgeSort();
 		VertexEdgeSort softSort = new VertexEdgeSort();
 		
 		LinkedList<Edge> k = Kruskal.kruskalMST(G, G.getEdges());
 		k.sort(hardSort);
-		System.out.println(k);
 		
 		Edge[] edges = G.getEdges();
 		Arrays.sort(edges, softSort);
@@ -31,7 +31,9 @@ public class Test3 {
 			{
 				if (edges[j] == null || edges[i] == null)
 					continue;
-				if (edges[i].source == edges[j].source && edges[i].destination == edges[j].destination && edges[i].ID != edges[j].ID)
+				if ((edges[i].source == edges[j].source && edges[i].destination == edges[j].destination
+						|| edges[i].source == edges[j].destination && edges[i].destination == edges[j].source)
+						&& edges[i].ID != edges[j].ID)
 				{
 					if (edges[i].weight <= edges[j].weight)
 						edges[j] = null;
@@ -45,8 +47,10 @@ public class Test3 {
 			if (edges[i] != null)
 				newlist.add(edges[i]);
 		newlist.sort(softSort);
-		LinkedList<Edge> m = MyMST.myMST(G);
+		Graph G2 = new Graph(newlist, NUMVERT);
+		LinkedList<Edge> m = MyMST.myMST(G2);
 		m.sort(hardSort);
+		System.out.println(k);
 		System.out.println(m);
 		
 		int counter = 0;
@@ -55,8 +59,7 @@ public class Test3 {
 			if (!m.contains(e))
 				counter++;
 		}
-		counter += Math.abs(m.size() - k.size());
-		System.out.println(counter + " errors found, " + ((double)counter)/((double)m.size()) + "% error");
+		System.out.println(counter + " errors found");//, " + ((double)counter)*100/((double)m.size()) + "% error");
 	}
 
 }
