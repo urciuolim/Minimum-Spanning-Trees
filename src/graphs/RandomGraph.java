@@ -21,7 +21,8 @@ public class RandomGraph extends Graph
 			node1 = rand.nextInt(numVert);
 			node2 = rand.nextInt(numVert);
 			weight = rand.nextInt(maxWeight);
-			nodes.get(node1).edges.add(new Edge(weight, nodes.get(node1), nodes.get(node2)));
+			nodes.get(node1).edges.add(new Edge(weight, nodes.get(node1), nodes.get(node2), i));
+			
 		}
 	}
 }

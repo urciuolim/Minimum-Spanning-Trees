@@ -5,12 +5,22 @@ public class Edge implements Comparable<Edge>
 	int weight;
 	public Node source;
 	public Node destination;
+	public int ID;
 	
 	public Edge(int w, Node s, Node d)
 	{
 		weight = w;
 		source = s;
 		destination = d;
+		ID = -1;
+	}
+	
+	public Edge(int w, Node s, Node d, int id)
+	{
+		weight = w;
+		source = s;
+		destination = d;
+		ID = id;
 	}
 	
 	public boolean equals(Edge e)
